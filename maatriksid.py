@@ -1,5 +1,5 @@
 #encoding: utf-8
-
+#muudetud Githubis
 def skalaar(v1,v2):
     return sum([v1[x]*v2[x] for x in range(len(v1))])
 
