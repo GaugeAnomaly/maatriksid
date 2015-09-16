@@ -1,5 +1,4 @@
 #encoding: utf-8
-#muudetud Githubis
 def skalaar(v1,v2):
     return sum([v1[x]*v2[x] for x in range(len(v1))])
 
@@ -84,6 +83,13 @@ class Maatriks:
                 temp.append([])
                 for j in range(n):
                     temp[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
+            return Maatriks(temp)
+        if type(m2) is int or type(m2) is float:
+            temp = []
+            for i in range(self.read_arv()):
+                temp.append([])
+                for j in range(self.veer_arv()):
+                    temp[i].append(self.M[i][j]*m2)
             return Maatriks(temp)
 
     def __add__(self,m2):
