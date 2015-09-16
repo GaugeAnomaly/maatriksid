@@ -85,6 +85,13 @@ class Maatriks:
                 for j in range(n):
                     temp[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
             return Maatriks(temp)
+        if type(m2) is int or type(m2) is float:
+            temp = []
+            for i in range(self.read_arv()):
+                temp.append([])
+                for j in range(self.veer_arv()):
+                    temp[i].append(self.M[i][j]*m2)
+            return Maatriks(temp)
     
     def __rmul__(self, m2):
         if type(m2) is Maatriks:
@@ -102,9 +109,16 @@ class Maatriks:
                 for j in range(n):
                     temp[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
             return Maatriks(temp)
+        if type(m2) is int or type(m2) is float:
+            temp = []
+            for i in range(self.read_arv()):
+                temp.append([])
+                for j in range(self.veer_arv()):
+                    temp[i].append(self.M[i][j]*m2)
+            return Maatriks(temp)
 
     def __add__(self,m2):
-        if type(m2) is int pr type(m2) is float:
+        if type(m2) is int or type(m2) is float:
             print("Sa ei saa maatrikseid ja numbreid liita")
             return
         if self.read_arv() != m2.read_arv() or self.veer_arv() != m2.veer_arv():
