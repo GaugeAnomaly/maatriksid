@@ -85,6 +85,31 @@ class Maatriks:
                     temp[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
             return Maatriks(temp)
         if type(m2) is int or type(m2) is float:
+<<<<<<< HEAD
+=======
+            temp = []
+            for i in range(self.read_arv()):
+                temp.append([])
+                for j in range(self.veer_arv()):
+                    temp[i].append(self.M[i][j]*m2)
+            return Maatriks(temp)
+    
+    def __rmul__(self, m2):
+        if type(m2) is Maatriks:
+            if self.read_arv() == [] or m2.read_arv() == 0:
+                print("Maatriks on tyhi!!!")
+                return 0
+            if self.read_arv() != m2.veer_arv():
+                print("Neid maatrikseid ei saa korrutada!!!!")
+                return
+>>>>>>> origin/master
+            temp = []
+            for i in range(self.read_arv()):
+                temp.append([])
+                for j in range(self.veer_arv()):
+                    temp[i].append(self.M[i][j]*m2)
+            return Maatriks(temp)
+        if type(m2) is int or type(m2) is float:
             temp = []
             for i in range(self.read_arv()):
                 temp.append([])
@@ -93,6 +118,12 @@ class Maatriks:
             return Maatriks(temp)
 
     def __add__(self,m2):
+<<<<<<< HEAD
+=======
+        if type(m2) is int or type(m2) is float:
+            print("Sa ei saa maatrikseid ja numbreid liita")
+            return
+>>>>>>> origin/master
         if self.read_arv() != m2.read_arv() or self.veer_arv() != m2.veer_arv():
             print("Neid maatrikseid ei saa liita!!!!")
             return
