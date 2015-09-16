@@ -70,20 +70,21 @@ class Maatriks:
         return Maatriks(M)
 
     def __mul__(self, m2):
-        if self.read_arv() == [] or m2.read_arv() == 0:
-            print("Maatriks on tyhi!!!")
-            return 0
-        if self.veer_arv() != m2.read_arv():
-            print("Neid maatrikseid ei saa korrutada!!!!")
-            return
-        temp = []
-        m = self.read_arv()
-        n = m2.veer_arv()
-        for i in range(m):
-            temp.append([])
-            for j in range(n):
-                temp[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
-        return Maatriks(temp)
+        if type(m2) is Maatriks:
+            if self.read_arv() == [] or m2.read_arv() == 0:
+                print("Maatriks on tyhi!!!")
+                return 0
+            if self.veer_arv() != m2.read_arv():
+                print("Neid maatrikseid ei saa korrutada!!!!")
+                return
+            temp = []
+            m = self.read_arv()
+            n = m2.veer_arv()
+            for i in range(m):
+                temp.append([])
+                for j in range(n):
+                    temp[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
+            return Maatriks(temp)
 
     def __add__(self,m2):
         if self.read_arv() != m2.read_arv() or self.veer_arv() != m2.veer_arv():
