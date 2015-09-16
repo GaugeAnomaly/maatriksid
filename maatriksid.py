@@ -69,7 +69,7 @@ class Maatriks:
                 M[i].append((-1)**(i+j)*self.transpoos().miinor(i,j)/d)
         return Maatriks(M)
 
-    def korruta(self, m2):
+    def __mul__(self, m2):
         if self.read_arv() == [] or m2.read_arv() == 0:
             print("Maatriks on tyhi!!!")
             return 0
