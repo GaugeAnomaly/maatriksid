@@ -76,11 +76,11 @@ class Maatriks:
         if self.veer_arv() != m2.read_arv():
             print("Neid maatrikseid ei saa korrutada!!!!")
             return
-        M1 = []
+        temp = []
         m = self.read_arv()
         n = m2.veer_arv()
         for i in range(m):
-            M1.append([])
+            temp.append([])
             for j in range(n):
-                M1[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
-        return Maatriks(M1)
+                temp[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
+        return Maatriks(temp)
