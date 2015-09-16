@@ -54,7 +54,7 @@ class Maatriks:
             return 0
         if n == 1:
             return self.M[0][0]
-        return sum([(-1)**i * self.M[0][i] * Maatriks(self.M).miinor(0,i) for i in range(n)])
+        return sum([(-1)**i * self.M[0][i] * self.miinor(0,i) for i in range(n)])
         
     def pöörd(self):
         d = self.det()
@@ -83,4 +83,15 @@ class Maatriks:
             temp.append([])
             for j in range(n):
                 temp[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
+        return Maatriks(temp)
+
+    def __add__(self,m2):
+        if self.read_arv() != m2.read_arv() or self.veer_arv() != m2.veer_arv():
+            print("Neid maatrikseid ei saa liita!!!!")
+            return
+        temp = []
+        for i in range(self.read_arv()):
+            temp.append([])
+            for j in range(self.veer_arv()):
+                temp[i].append(self.M[i][j]+m2.M[i][j])
         return Maatriks(temp)
