@@ -57,8 +57,8 @@ class Maatriks:
         return sum([(-1)**i * self.M[0][i] * Maatriks(self.M).miinor(0,i) for i in range(n)])
         
     def pöörd(self):
-        d = Maatriks(self.M).det()
-        n = len(self.M)
+        d = self.det()
+        n = self.read_arv()
         if d == 0:
             print("Sellel maatriksil ei saa olla pöördväärtust!!!!")
             return
