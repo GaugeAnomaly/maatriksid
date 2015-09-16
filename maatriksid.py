@@ -1,5 +1,5 @@
 #encoding: utf-8
-
+#muudetud Githubis
 def skalaar(v1,v2):
     return sum([v1[x]*v2[x] for x in range(len(v1))])
 
@@ -33,7 +33,7 @@ class Maatriks:
     def miinor(self,i,j):
         temp = []
         c1 = 0
-        for k in range(len(self.M)):
+        for k in range(self.read_arv()):
             if k == i:
                 continue
             temp.append([])
@@ -45,8 +45,8 @@ class Maatriks:
         return Maatriks(temp).det()
 
     def det(self):
-        n = len(self.M)
-        if len(self.M) != len(self.M[0]):
+        n = self.read_pikkus()
+        if n != self.veer_pikkus():
             print("Ei ole ruutmaatriks!!!")
             return 0
         if n == 0:
@@ -66,7 +66,7 @@ class Maatriks:
         for i in range(n):
             M.append([])
             for j in range(n):
-                M[i].append((-1)**(i+j)*Maatriks(self.M).transpoos().miinor(i,j)/d)
+                M[i].append((-1)**(i+j)*self.transpoos().miinor(i,j)/d)
         return Maatriks(M)
 
     def korruta(self, m2):
