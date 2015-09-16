@@ -45,8 +45,8 @@ class Maatriks:
         return Maatriks(temp).det()
 
     def det(self):
-        n = self.read_pikkus()
-        if n != self.veer_pikkus():
+        n = self.read_arv()
+        if n != self.veer_arv():
             print("Ei ole ruutmaatriks!!!")
             return 0
         if n == 0:
