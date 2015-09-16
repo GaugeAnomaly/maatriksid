@@ -96,3 +96,14 @@ class Maatriks:
             for j in range(self.veer_arv()):
                 temp[i].append(self.M[i][j]+m2.M[i][j])
         return Maatriks(temp)
+    
+    def __radd__(self,m2):
+        if self.read_arv() != m2.read_arv() or self.veer_arv() != m2.veer_arv():
+            print("Neid maatrikseid ei saa liita!!!!")
+            return
+        temp = []
+        for i in range(self.read_arv()):
+            temp.append([])
+            for j in range(self.veer_arv()):
+                temp[i].append(self.M[i][j]+m2.M[i][j])
+        return Maatriks(temp)
