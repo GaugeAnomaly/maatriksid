@@ -98,7 +98,7 @@ class Maatriks:
             if self.read_arv() == [] or m2.read_arv() == 0:
                 print("Maatriks on tyhi!!!")
                 return 0
-            if self.veer_arv() != m2.read_arv():
+            if self.read_arv() != m2.veer_arv():
                 print("Neid maatrikseid ei saa korrutada!!!!")
                 return
             temp = []
