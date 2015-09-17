@@ -1,6 +1,7 @@
 #encoding: utf-8
 #Selle muudatuse tegin Code-is
 #selle ka
+#ja selle
 def skalaar(v1,v2):
     return sum([v1[x]*v2[x] for x in range(len(v1))])
 
