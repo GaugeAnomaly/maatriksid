@@ -72,11 +72,9 @@ class Maatriks:
                 print("Neid maatrikseid ei saa korrutada!!!!")
                 return
             temp = []
-            m = self.read_arv()
-            n = m2.veer_arv()
-            for i in range(m):
+            for i in range(self.read_arv()):
                 temp.append([])
-                for j in range(n):
+                for j in range(m2.veer_arv()):
                     temp[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
             return Maatriks(temp)
         if type(m2) is int or type(m2) is float:
@@ -96,10 +94,10 @@ class Maatriks:
                 print("Neid maatrikseid ei saa korrutada!!!!")
                 return
             temp = []
-            for i in range(self.read_arv()):
+            for i in range(m2.read_arv()):
                 temp.append([])
                 for j in range(self.veer_arv()):
-                    temp[i].append(self.M[i][j]*m2)
+                    temp[i].append(int(round(skalaar(m2.vec(i),self.transpoos().vec(j)),3)))
             return Maatriks(temp)
         if type(m2) is int or type(m2) is float:
             temp = []
