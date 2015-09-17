@@ -3,10 +3,6 @@ def skalaar(v1,v2):
     return sum([v1[x]*v2[x] for x in range(len(v1))])
 
 class Maatriks:
-    """M = [[1,2,3,4],
-     [-3,-2,-3,-4],
-     [8,-9,1,0],
-     [0,-1,-2,2]]"""
      
     def vec(self, n):
         return self.M[n]
