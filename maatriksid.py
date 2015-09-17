@@ -3,7 +3,7 @@ def skalaar(v1,v2):
     return sum([v1[x]*v2[x] for x in range(len(v1))])
 
 class Maatriks:
-     
+     #Liasn selle
     def vec(self, n):
         return self.M[n]
 
