@@ -11,8 +11,11 @@ def fillMatrix(n,m,fun):
     return Maatriks(temp)
 
 class Maatriks:
-    def vec(self, n):
+    def rvec(self, n):
         return self.M[n]
+
+    def vvec(self, n):
+        return self.transpoos().M[n]
 
     def __init__(self,mlist):
         self.M = mlist
@@ -72,7 +75,7 @@ class Maatriks:
         if type(m2) is Maatriks:
             if self.veer_arv() != m2.read_arv():
                 return print("Neid maatrikseid ei saa korrutada!!!!")
-            return fillMatrix(self.read_arv(),m2.veer_arv(),lambda x,y: int(round(skalaar(self.vec(x),m2.transpoos().vec(y)),3)))
+            return fillMatrix(self.read_arv(),m2.veer_arv(),lambda x,y: int(round(skalaar(self.rvec(x),m2.vvec(y)),3)))
         if type(m2) is int or type(m2) is float:
             return fillMatrix(self.read_arv(),self.veer_arv(),lambda x,y: self.M[x][y]*m2)
     
@@ -80,7 +83,7 @@ class Maatriks:
         if type(m2) is Maatriks:
             if self.read_arv() != m2.veer_arv():
                 return print("Neid maatrikseid ei saa korrutada!!!!")
-            return fillMatrix(m2.read_arv(),self.veer_arv(),lambda x,y: int(round(skalaar(m2.vec(x),self.transpoos().vec(y)),3)))
+            return fillMatrix(m2.read_arv(),self.veer_arv(),lambda x,y: int(round(skalaar(m2.rvec(x),self.vvec(y)),3)))
         if type(m2) is int or type(m2) is float:
             return fillMatrix(self.read_arv(),self.veer_arv(),lambda x,y: self.M[x][y]*m2)
         
