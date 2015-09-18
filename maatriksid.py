@@ -6,6 +6,14 @@
 def skalaar(v1,v2):
     return sum([v1[x]*v2[x] for x in range(len(v1))])
 
+def fillMatrix(n,m,fun):
+    temp = []
+    for i in range(n):
+        temp.append([])
+        for j in range(m):
+            temp[i].append(fun(i,j))
+    return Maatriks(temp)
+
 class Maatriks:
     def vec(self, n):
         return self.M[n]
@@ -18,15 +26,21 @@ class Maatriks:
     
     def veer_arv(self):
         return len(self.M[0])
-    
+
+    def transpoos(self):
+        return Maatriks([list(x) for x in zip(*self.M)])
+
+    def alamdet(self,i,j):
+        return (-1)**(i+j) * self.miinor(i,j)
+
+    def adj(self):
+        return fillMatrix(self.read_arv(),self.veer_arv(),self.alamdet)
+
     def printMatrix(self):
         for i in self.M:
             for j in i:
                 print(round(j,3),end='\t')
             print('\n')
-
-    def transpoos(self):
-        return Maatriks([list(x) for x in zip(*self.M)])
 
     def miinor(self,i,j):
         temp = []
@@ -42,17 +56,6 @@ class Maatriks:
             c1 += 1
         return Maatriks(temp).det()
 
-    def alamdet(self,i,j):
-        return (-1)**(i+j) * self.miinor(i,j)
-
-    def adj(self):
-        temp = []
-        for i in range(self.read_arv()):
-            temp.append([])
-            for j in range(self.veer_arv()):
-                temp[i].append(self.alamdet(i,j))
-        return Maatriks(temp)
-
     def det(self):
         n = self.read_arv()
         if n != self.veer_arv():
@@ -67,67 +70,35 @@ class Maatriks:
         
     def pöörd(self):
         d = self.det()
-        n = self.read_arv()
         if d == 0:
             print("Sellel maatriksil ei saa olla pöördväärtust!!!!")
             return
-        return self.transpoos().adj()*(1/self.det())
+        return self.transpoos().adj()*(1/d)
 
     def __mul__(self, m2):
         if type(m2) is Maatriks:
-            if self.read_arv() == [] or m2.read_arv() == 0:
-                print("Maatriks on tyhi!!!")
-                return 0
             if self.veer_arv() != m2.read_arv():
                 print("Neid maatrikseid ei saa korrutada!!!!")
                 return
-            temp = []
-            for i in range(self.read_arv()):
-                temp.append([])
-                for j in range(m2.veer_arv()):
-                    temp[i].append(int(round(skalaar(self.vec(i),m2.transpoos().vec(j)),3)))
-            return Maatriks(temp)
+            return fillMatrix(self.read_arv(),m2.veer_arv(),lambda x,y: int(round(skalaar(self.vec(x),m2.transpoos().vec(y)),3)))
         if type(m2) is int or type(m2) is float:
-            temp = []
-            for i in range(self.read_arv()):
-                temp.append([])
-                for j in range(self.veer_arv()):
-                    temp[i].append(self.M[i][j]*m2)
-            return Maatriks(temp)
+            return fillMatrix(self.read_arv(),self.veer_arv(),lambda x,y: self.M[x][y]*m2)
     
     def __rmul__(self, m2):
         if type(m2) is Maatriks:
-            if self.read_arv() == [] or m2.read_arv() == 0:
-                print("Maatriks on tyhi!!!")
-                return 0
             if self.read_arv() != m2.veer_arv():
                 print("Neid maatrikseid ei saa korrutada!!!!")
                 return
-            temp = []
-            for i in range(m2.read_arv()):
-                temp.append([])
-                for j in range(self.veer_arv()):
-                    temp[i].append(int(round(skalaar(m2.vec(i),self.transpoos().vec(j)),3)))
-            return Maatriks(temp)
+            return fillMatrix(m2.read_arv(),self.veer_arv(),lambda x,y: int(round(skalaar(m2.vec(x),self.transpoos().vec(y)),3)))
         if type(m2) is int or type(m2) is float:
-            temp = []
-            for i in range(self.read_arv()):
-                temp.append([])
-                for j in range(self.veer_arv()):
-                    temp[i].append(self.M[i][j]*m2)
-            return Maatriks(temp)
+            return fillMatrix(self.read_arv(),self.veer_arv(),lambda x,y: self.M[x][y]*m2)
         
     def __div__(self,x):
         if type(x) is Maatriks:
             print("Maatrikseid ei saa jagada!!!!!")
             return
         if type(x) is int or type(x) is float:
-            temp = []
-            for i in range(self.read_arv()):
-                temp.append([])
-                for j in range(self.veer_arv()):
-                    temp[i].append(self.M[i][j]/x)
-            return Maatriks(temp)
+            return fillMatrix(self.read_arv(),self.veer_arv(),lambda k,l: self.M[k][l]/x)
 
     def __add__(self,m2):
         if type(m2) is int or type(m2) is float:
@@ -136,9 +107,4 @@ class Maatriks:
         if self.read_arv() != m2.read_arv() or self.veer_arv() != m2.veer_arv():
             print("Neid maatrikseid ei saa liita!!!!")
             return
-        temp = []
-        for i in range(self.read_arv()):
-            temp.append([])
-            for j in range(self.veer_arv()):
-                temp[i].append(self.M[i][j]+m2.M[i][j])
-        return Maatriks(temp)
+        return fillMatrix(self.read_arv(),self.veer_arv(),lambda x,y: self.M[x][y]+m2.M[x][y])
