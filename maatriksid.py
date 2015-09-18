@@ -22,7 +22,7 @@ class Maatriks:
     def printMatrix(self):
         for i in self.M:
             for j in i:
-                print(j,end='\t')
+                print(round(j,3),end='\t')
             print('\n')
 
     def transpoos(self):
@@ -42,6 +42,17 @@ class Maatriks:
             c1 += 1
         return Maatriks(temp).det()
 
+    def alamdet(self,i,j):
+        return (-1)**(i+j) * self.miinor(i,j)
+
+    def adj(self):
+        temp = []
+        for i in range(self.read_arv()):
+            temp.append([])
+            for j in range(self.veer_arv()):
+                temp[i].append(self.alamdet(i,j))
+        return Maatriks(temp)
+
     def det(self):
         n = self.read_arv()
         if n != self.veer_arv():
@@ -52,7 +63,7 @@ class Maatriks:
             return 0
         if n == 1:
             return self.M[0][0]
-        return sum([(-1)**i * self.M[0][i] * self.miinor(0,i) for i in range(n)])
+        return sum([self.M[0][i]*self.alamdet(0,i) for i in range(n)])
         
     def pöörd(self):
         d = self.det()
@@ -60,12 +71,7 @@ class Maatriks:
         if d == 0:
             print("Sellel maatriksil ei saa olla pöördväärtust!!!!")
             return
-        M = []
-        for i in range(n):
-            M.append([])
-            for j in range(n):
-                M[i].append((-1)**(i+j)*self.transpoos().miinor(i,j)/d)
-        return Maatriks(M)
+        return self.transpoos().adj()*(1/self.det())
 
     def __mul__(self, m2):
         if type(m2) is Maatriks:
@@ -109,6 +115,18 @@ class Maatriks:
                 temp.append([])
                 for j in range(self.veer_arv()):
                     temp[i].append(self.M[i][j]*m2)
+            return Maatriks(temp)
+        
+    def __div__(self,x):
+        if type(x) is Maatriks:
+            print("Maatrikseid ei saa jagada!!!!!")
+            return
+        if type(x) is int or type(x) is float:
+            temp = []
+            for i in range(self.read_arv()):
+                temp.append([])
+                for j in range(self.veer_arv()):
+                    temp[i].append(self.M[i][j]/x)
             return Maatriks(temp)
 
     def __add__(self,m2):
