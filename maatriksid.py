@@ -1,4 +1,5 @@
 #encoding: utf-8
+#Robin on siin
 def skalaar(v1,v2):
     return sum([v1[x]*v2[x] for x in range(len(v1))])
 
@@ -60,7 +61,7 @@ class Maatriks:
         if n != self.veer_arv():
             return print("Ei ole ruutmaatriks!!!")
         if n == 0:
-            return print("Maatris on tyhi!!!!")
+            return print("Maatriks on tyhi!!!!")
         if n == 1:
             return self.M[0][0]
         return sum([self.M[0][i]*self.alamdet(0,i) for i in range(n)])
