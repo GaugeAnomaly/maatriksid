@@ -61,7 +61,7 @@ class Maatriks:
     def det(self):
         n = self.read_arv()
         if n != self.veer_arv():
-            return print("Ei ole ruutmaatriks!!!")
+            return print("Ei ole ruutmaatriks!")
         if n == 0:
             return print("Maatriks on tyhi!!!!")
         if n == 1:
