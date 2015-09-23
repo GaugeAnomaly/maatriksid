@@ -14,6 +14,9 @@ def fillMatrix(n,m,fun):
     return Maatriks(temp)
 
 class Maatriks:
+    def rank(self):
+        return 
+    
     def rvec(self, n):
         return self.M[n]
 
