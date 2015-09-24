@@ -1,5 +1,6 @@
 #encoding: utf-8
 #Robin on siin
+######MUUTSIN GITIS
 from copy import deepcopy
 
 def skalaar(v1,v2):
