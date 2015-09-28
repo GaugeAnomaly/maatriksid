@@ -88,7 +88,8 @@ class Maatriks:
         if type(m2) is int or type(m2) is float:
             return fillMatrix(self.read_arv(),self.veer_arv(),lambda x,y: self.M[x][y]*m2)
         
-    def __div__(self,x):
+    def __truediv__(self,x):
+        print("division")
         if type(x) is Maatriks:
             return print("Maatrikseid ei saa jagada!!!!!")
         if type(x) is int or type(x) is float:
