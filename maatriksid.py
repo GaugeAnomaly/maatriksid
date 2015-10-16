@@ -1,6 +1,14 @@
 #encoding: utf-8
-#Robin on siin
-######MUUTSIN GITIS
+"""
+Lühike kasutusjuhend:
+maatriksid.py on Pythoni teek, mis võimaldab teha lihtsaid arvutusi maatriksitega.
+Kõik maatriksitega seotud funktsioonid ja operatsioonid mida saab selle teegiga kasutada
+on välja toodud Maatriksi klassi kirjelduses. Lisaks sellele on teegis kaks funktsiooni: skalaar(v1,v2),
+mis annab vektorite skalaarkorrutise; fillMatrix(n,m,fun), mis loob uue maatriksi mõõtmetega n x m
+ja arvutab igale elemendile väärtuse funktsiooniga fun (fun on fillMatrixi argument, mis on funktsiooni tüüpi).
+Igal maatriksil on oma meetod .printMatrix(), mis ei võta argumente (prindib välja maatriksi, mis seda meetodi
+kutsub). Kui tekib küsimusi või leidub vigu, saatke tagasisidet aadressile van_gentjanaare@hotmail.com
+"""
 from copy import deepcopy
 
 def skalaar(v1,v2):
@@ -16,8 +24,25 @@ def fillMatrix(n,m,fun):
 
 class Maatriks:
     def rank(self):
-        return 
-    
+        n = min([len(self.M),len(self.M[0])])
+        dr = len(self.M)-len(self.M[0])
+        if n == 1 and dr == 0 and self.det() == 0:
+            return 0
+        if fillMatrix(n,n,lambda x,y: self.M[x][y]).det() != 0:
+            return n
+        for i in range(abs(dr)):
+            if dr > 0:
+                if fillMatrix(n,n,lambda x,y: self.M[x+i+1][y]).det() != 0:
+                    return n
+            else:
+                if fillMatrix(n,n,lambda x,y: self.M[x][y+i+1]).det() != 0:
+                    return n
+        astakud = []
+        for i in range(len(self.M)):
+            for j in range(len(self.M[0])):
+                astakud.append(self.alamMaatriks(i,j).rank())
+        return max(astakud)
+
     def rvec(self, n):
         return self.M[n]
 
@@ -42,8 +67,11 @@ class Maatriks:
     def adj(self):
         return fillMatrix(self.read_arv(),self.veer_arv(),self.alamdet)
 
+    def alamMaatriks(self,i,j):
+        return self.transpoos().drop(j).transpoos().drop(i)
+
     def miinor(self,i,j):
-        return self.transpoos().drop(j).transpoos().drop(i).det()
+        return self.alamMaatriks(i,j).det()
 
     def drop(self, i):
         temp = deepcopy(self.M)
